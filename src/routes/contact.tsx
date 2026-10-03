@@ -39,7 +39,7 @@ function ContactPage() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const p = schema.safeParse(form);
-    if (!p.success) return setError(p.error.issues[0].message);
+    if (!p.success) return setError(p.error.issues[0]?.message ?? "Champ invalide");
     setError("");
     setBusy(true);
     const { error } = await supabase.from("contact_messages").insert(p.data);
