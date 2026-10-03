@@ -48,7 +48,7 @@ function AuthPage() {
     e.preventDefault();
     setError("");
     const parsed = creds.safeParse({ email, password });
-    if (!parsed.success) return setError(parsed.error.issues[0].message);
+    if (!parsed.success) return setError(parsed.error.issues[0]?.message ?? "Champ invalide");
     if (mode === "inscription" && !name.trim()) return setError("Indiquez votre nom complet");
     setBusy(true);
     if (mode === "inscription") {

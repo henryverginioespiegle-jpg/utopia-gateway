@@ -49,15 +49,13 @@ function A11yMenu() {
 }
 
 export function Header() {
-  const { user, isStaff, roles, signOut } = useAuth();
+  const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const links = [
     ...publicLinks,
     ...(user ? ([{ to: "/tableau-de-bord", label: "Mon espace" }, { to: "/demandes", label: "Mes demandes" }] as const) : []),
-    ...(isStaff ? ([{ to: "/agent", label: "Espace agent" }] as const) : []),
-    ...(roles.includes("admin") ? ([{ to: "/admin", label: "Administration" }] as const) : []),
   ];
 
   const logout = async () => {

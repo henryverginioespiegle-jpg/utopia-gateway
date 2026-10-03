@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
+function Counter({ to, suffix = "" }: { to: number; suffix?: string | undefined }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
   const [v, setV] = useState(0);
