@@ -12,6 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ConnexionRouteImport } from './routes/connexion'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as JournalRouteImport } from './routes/journal'
+import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as ParticipationRouteImport } from './routes/participation'
 import { Route as TableauDeBordRouteImport } from './routes/tableau-de-bord'
 import { Route as ActualitesIndexRouteImport } from './routes/actualites.index'
 import { Route as ActualitesSlugRouteImport } from './routes/actualites.$slug'
@@ -33,6 +36,21 @@ const ConnexionRoute = ConnexionRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalRoute = JournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParticipationRoute = ParticipationRouteImport.update({
+  id: '/participation',
+  path: '/participation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TableauDeBordRoute = TableauDeBordRouteImport.update({
@@ -75,6 +93,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/connexion': typeof ConnexionRoute
   '/contact': typeof ContactRoute
+  '/journal': typeof JournalRoute
+  '/notifications': typeof NotificationsRoute
+  '/participation': typeof ParticipationRoute
   '/tableau-de-bord': typeof TableauDeBordRoute
   '/actualites/$slug': typeof ActualitesSlugRoute
   '/demandes/nouvelle': typeof DemandesNouvelleRoute
@@ -87,6 +108,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/connexion': typeof ConnexionRoute
   '/contact': typeof ContactRoute
+  '/journal': typeof JournalRoute
+  '/notifications': typeof NotificationsRoute
+  '/participation': typeof ParticipationRoute
   '/tableau-de-bord': typeof TableauDeBordRoute
   '/actualites/$slug': typeof ActualitesSlugRoute
   '/demandes/nouvelle': typeof DemandesNouvelleRoute
@@ -100,6 +124,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/connexion': typeof ConnexionRoute
   '/contact': typeof ContactRoute
+  '/journal': typeof JournalRoute
+  '/notifications': typeof NotificationsRoute
+  '/participation': typeof ParticipationRoute
   '/tableau-de-bord': typeof TableauDeBordRoute
   '/actualites/$slug': typeof ActualitesSlugRoute
   '/demandes/nouvelle': typeof DemandesNouvelleRoute
@@ -114,6 +141,9 @@ export interface FileRouteTypes {
     | '/'
     | '/connexion'
     | '/contact'
+    | '/journal'
+    | '/notifications'
+    | '/participation'
     | '/tableau-de-bord'
     | '/actualites/$slug'
     | '/demandes/nouvelle'
@@ -126,6 +156,9 @@ export interface FileRouteTypes {
     | '/'
     | '/connexion'
     | '/contact'
+    | '/journal'
+    | '/notifications'
+    | '/participation'
     | '/tableau-de-bord'
     | '/actualites/$slug'
     | '/demandes/nouvelle'
@@ -138,6 +171,9 @@ export interface FileRouteTypes {
     | '/'
     | '/connexion'
     | '/contact'
+    | '/journal'
+    | '/notifications'
+    | '/participation'
     | '/tableau-de-bord'
     | '/actualites/$slug'
     | '/demandes/nouvelle'
@@ -151,6 +187,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ConnexionRoute: typeof ConnexionRoute
   ContactRoute: typeof ContactRoute
+  JournalRoute: typeof JournalRoute
+  NotificationsRoute: typeof NotificationsRoute
+  ParticipationRoute: typeof ParticipationRoute
   TableauDeBordRoute: typeof TableauDeBordRoute
   ActualitesSlugRoute: typeof ActualitesSlugRoute
   DemandesNouvelleRoute: typeof DemandesNouvelleRoute
@@ -181,6 +220,27 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal': {
+      id: '/journal'
+      path: '/journal'
+      fullPath: '/journal'
+      preLoaderRoute: typeof JournalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/participation': {
+      id: '/participation'
+      path: '/participation'
+      fullPath: '/participation'
+      preLoaderRoute: typeof ParticipationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tableau-de-bord': {
@@ -239,6 +299,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ConnexionRoute: ConnexionRoute,
   ContactRoute: ContactRoute,
+  JournalRoute: JournalRoute,
+  NotificationsRoute: NotificationsRoute,
+  ParticipationRoute: ParticipationRoute,
   TableauDeBordRoute: TableauDeBordRoute,
   ActualitesSlugRoute: ActualitesSlugRoute,
   DemandesNouvelleRoute: DemandesNouvelleRoute,
