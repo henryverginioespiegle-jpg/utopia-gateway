@@ -49,13 +49,15 @@ function A11yMenu() {
 }
 
 export function Header() {
-  const { user, signOut } = useAuth();
+  const { user, signOut, isStaff } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const links = [
     ...publicLinks,
-    ...(user ? ([{ to: "/tableau-de-bord", label: "Mon espace" }, { to: "/demandes", label: "Mes demandes" }] as const) : []),
+    { to: "/participation", label: "Participation" } as const,
+    ...(user ? ([{ to: "/tableau-de-bord", label: "Mon espace" }, { to: "/demandes", label: "Mes demandes" }, { to: "/notifications", label: "Notifications" }] as const) : []),
+    ...(isStaff ? ([{ to: "/journal", label: "Journal" }] as const) : []),
   ];
 
   const logout = async () => {

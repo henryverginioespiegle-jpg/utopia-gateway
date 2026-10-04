@@ -23,8 +23,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => {
+    const { data: sub } = supabase.auth.onAuthStateChange((e, s) => {
       setSession(s);
+      if (e === "SIGNED_IN" && s && sessionStorage.getItem("tn-logged") !== s.user.id) {
+        sessionStorage.setItem("tn-logged", s.user.id);
+        setTimeout(() => { supabase.from("audit_logs").insert({ action: "connexion", entity: "session", entity_id: s.user.id }).then(() => {}); }, 0);
+      }
       if (!s) {
         setRoles([]);
         setFullName("");
@@ -59,6 +63,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     loading,
     isStaff: roles.includes("agent") || roles.includes("admin"),
     signOut: async () => {
+      if (session) await supabase.from("audit_logs").insert({ action: "deconnexion", entity: "session", entity_id: session.user.id });
+      sessionStorage.removeItem("tn-logged");
       await supabase.auth.signOut();
     },
   };
